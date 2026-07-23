@@ -1,9 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "mindpang-issue",
-  "main": "worker.ts",
+  "main": ".open-next/worker.js",
   "compatibility_date": "2025-12-01",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "keep_vars": true,
   "keep_names": false,
   "assets": {
