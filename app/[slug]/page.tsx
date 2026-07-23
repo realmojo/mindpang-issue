@@ -6,7 +6,17 @@ import { ArrowLeft } from "lucide-react"
 
 import { getIssueBySlug, getRelatedIssues } from "@/lib/issues"
 import { IssueCard } from "@/components/issue-card"
+import { AdUnit } from "@/components/ad-unit"
 import { siteConfig, issueUrl } from "@/lib/site"
+
+/** 본문 HTML 을 첫 문단(</p>) 뒤에서 분리 — 중간 광고 삽입용 */
+function splitAfterFirstParagraph(html: string): [string, string] {
+  const marker = "</p>"
+  const idx = html.indexOf(marker)
+  if (idx === -1) return [html, ""]
+  const cut = idx + marker.length
+  return [html.slice(0, cut), html.slice(cut)]
+}
 
 export const revalidate = 300
 
@@ -51,6 +61,7 @@ export default async function IssuePage({ params }: Props) {
   if (!issue) notFound()
 
   const related = await getRelatedIssues(issue.slug, 3)
+  const [firstPart, restPart] = splitAfterFirstParagraph(issue.content)
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -78,6 +89,9 @@ export default async function IssuePage({ params }: Props) {
         이슈 목록
       </Link>
 
+      {/* 광고: 이슈_상단 (제목 위) */}
+      <AdUnit slot="6709317490" className="mb-6" />
+
       <header>
         <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-[2.5rem] sm:leading-[1.15]">
           {issue.title}
@@ -97,11 +111,21 @@ export default async function IssuePage({ params }: Props) {
         </div>
       ) : null}
 
-      {/* 본문 (HTML) */}
+      {/* 본문 (HTML) — 첫 문단 뒤에 중간 광고 삽입 */}
       <div
         className="article-content mt-10"
-        dangerouslySetInnerHTML={{ __html: issue.content }}
+        dangerouslySetInnerHTML={{ __html: firstPart }}
       />
+
+      {/* 광고: 이슈_중간 (첫 문단 끝) */}
+      <AdUnit slot="9686568690" className="my-8" />
+
+      {restPart ? (
+        <div
+          className="article-content"
+          dangerouslySetInnerHTML={{ __html: restPart }}
+        />
+      ) : null}
 
       {/* 관련 글 */}
       {related.length > 0 ? (
