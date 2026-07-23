@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  verification: {
+    other: {
+      "naver-site-verification": "e87cc376d449d88606b06dfc7e1063625b133b01",
+    },
+  },
 }
 
 export default function RootLayout({
@@ -51,6 +56,12 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-svh">
+        {/* Google AdSense (React 19 가 async 스크립트를 <head> 로 호이스팅) */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522"
+          crossOrigin="anonymous"
+        />
         <ThemeProvider>
           <main className="min-h-[70svh]">{children}</main>
           <SiteFooter />
