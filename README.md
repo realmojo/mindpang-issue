@@ -55,8 +55,10 @@ curl -X POST https://issue.mindpang.com/api/issues \
 ## 환경 변수 (`.env`)
 
 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
-`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `AWS_BUCKET`,
-`ADMIN_TOKEN` (관리자 글쓰기/API 인증 — 운영 시 반드시 변경).
+`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `AWS_BUCKET`.
+
+`ADMIN_TOKEN` 은 **선택**입니다. 설정하면 글쓰기/API 에 `Authorization: Bearer <값>` 이 필요하고,
+비워두면 인증 없이 누구나 등록할 수 있습니다 (공개 배포 시 도배 방지를 위해 설정 권장).
 
 ## 개발
 

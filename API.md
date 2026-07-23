@@ -3,9 +3,10 @@
 `issue.mindpang.com` 에 글을 등록/조회하는 REST API 문서입니다.
 
 - **Base URL**: `https://issue.mindpang.com`
-- **인증**: 모든 쓰기/관리 API 는 `Authorization: Bearer <ADMIN_TOKEN>` 헤더 필요
-- **토큰**: `.env` 의 `ADMIN_TOKEN` 값 (운영 시 반드시 변경)
+- **인증(선택)**: 환경변수 `ADMIN_TOKEN` 이 **설정돼 있을 때만** `Authorization: Bearer <ADMIN_TOKEN>` 헤더가 필요합니다. `ADMIN_TOKEN` 을 설정하지 않으면 **인증 없이 누구나** 등록할 수 있습니다.
 - **본문 형식**: `application/json` (썸네일 파일 업로드만 `multipart/form-data`)
+
+> ⚠️ `ADMIN_TOKEN` 을 비워두면 글 등록 API가 공개됩니다. 공개 도메인에 배포한다면 스팸/도배 방지를 위해 토큰 설정을 권장합니다.
 
 ---
 
@@ -75,11 +76,10 @@ curl -X POST https://issue.mindpang.com/api/issues \
   }'
 ```
 
-**C. 썸네일 없이 텍스트만**
+**C. 토큰 미설정 시 — 헤더 없이 텍스트만**
 
 ```bash
 curl -X POST https://issue.mindpang.com/api/issues \
-  -H "Authorization: Bearer $ADMIN_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{ "title": "제목", "content": "<p>본문</p>" }'
 ```
@@ -206,7 +206,7 @@ curl https://issue.mindpang.com/api/issues \
 
 | 상태 | 바디 | 원인 |
 | --- | --- | --- |
-| `401` | `{ "error": "unauthorized" }` | 토큰 없음/불일치 |
+| `401` | `{ "error": "unauthorized" }` | `ADMIN_TOKEN` 설정된 상태에서 토큰 없음/불일치 |
 | `400` | `{ "error": "invalid json" }` | 요청 바디가 JSON 이 아님 |
 | `400` | `{ "error": "title, content required" }` | 필수값 누락 |
 | `400` | `{ "error": "이미지 다운로드 실패 (404)" }` | `thumbnailUrl` 을 가져오지 못함 |

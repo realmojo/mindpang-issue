@@ -86,13 +86,13 @@ export default function AdminWritePage() {
       <form onSubmit={handleSubmit} className="mt-8 space-y-5">
         <div>
           <label className="mb-1.5 block text-sm font-semibold">
-            관리자 토큰
+            관리자 토큰 <span className="font-normal text-muted-foreground">(선택 — ADMIN_TOKEN 설정 시에만 필요)</span>
           </label>
           <input
             type="password"
             value={token}
             onChange={(e) => saveToken(e.target.value)}
-            placeholder="ADMIN_TOKEN"
+            placeholder="ADMIN_TOKEN (미설정이면 비워두세요)"
             className={inputCls}
           />
         </div>
