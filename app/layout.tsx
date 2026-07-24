@@ -62,6 +62,17 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522"
           crossOrigin="anonymous"
         />
+        {/* 네이버 애널리틱스 (Wcslog) */}
+        <script src="//wcs.pstatic.net/wcslog.js" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "17ca51bdf5daf30";
+if(window.wcs) {
+  wcs_do();
+}`,
+          }}
+        />
         <ThemeProvider>
           <main className="min-h-[70svh]">{children}</main>
           <SiteFooter />
