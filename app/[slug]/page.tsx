@@ -60,7 +60,7 @@ export default async function IssuePage({ params }: Props) {
   const issue = await getIssueBySlug(decoded)
   if (!issue) notFound()
 
-  const related = await getRelatedIssues(issue.slug, 3)
+  const related = await getRelatedIssues(issue.slug, 6)
   const [firstPart, restPart] = splitAfterFirstParagraph(issue.content)
 
   const jsonLd = {
