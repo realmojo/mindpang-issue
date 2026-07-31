@@ -10,8 +10,8 @@ import { timeAgo } from "@/lib/format"
 export const revalidate = 60
 
 export default async function HomePage() {
-  // 대표 글 1개 + 목록 8개(1줄 2개 × 4줄)
-  const issues = await getIssues(9)
+  // 대표 글 1개 + 목록 4개(1줄 2개 × 2줄)
+  const issues = await getIssues(5)
 
   if (issues.length === 0) {
     return (
