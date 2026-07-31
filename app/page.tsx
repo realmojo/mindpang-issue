@@ -11,7 +11,7 @@ import { timeAgo } from "@/lib/format"
 export const revalidate = 60
 
 export default async function HomePage() {
-  const issues = await getIssues(31)
+  const issues = await getIssues(6)
 
   if (issues.length === 0) {
     return (

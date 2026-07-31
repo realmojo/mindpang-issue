@@ -61,7 +61,7 @@ export default async function IssuePage({ params }: Props) {
   const issue = await getIssueBySlug(decoded)
   if (!issue) notFound()
 
-  const related = await getRelatedIssues(issue.slug, 6)
+  const related = await getRelatedIssues(issue.slug, 4)
   const [firstPart, restPart] = splitAfterFirstParagraph(issue.content)
 
   const jsonLd = {
@@ -134,7 +134,8 @@ export default async function IssuePage({ params }: Props) {
           <h2 className="mb-6 text-lg font-extrabold tracking-tight">
             다른 이슈도 보기
           </h2>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+          {/* 모바일 2열 × 2줄(4개), 데스크톱 4열 */}
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
             {related.map((r) => (
               <IssueCard key={r.id} issue={r} />
             ))}
