@@ -62,6 +62,19 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9130836798889522"
           crossOrigin="anonymous"
         />
+        {/* Google Analytics (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-0Z6GPEQS69"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0Z6GPEQS69');`,
+          }}
+        />
         {/* 네이버 애널리틱스 (Wcslog) */}
         <script src="//wcs.pstatic.net/wcslog.js" />
         <script
