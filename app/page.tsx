@@ -4,6 +4,7 @@ import { Flame } from "lucide-react"
 
 import { getIssues } from "@/lib/issues"
 import { IssueCard } from "@/components/issue-card"
+import { TaboolaFeed } from "@/components/taboola-feed"
 import { timeAgo } from "@/lib/format"
 
 // 항상 최신 목록을 보여주기 위해 매 요청마다 갱신
@@ -72,6 +73,12 @@ export default async function HomePage() {
           ))}
         </div>
       ) : null}
+
+      {/* Taboola 홈 하단 피드 — 콘텐츠 맨 끝 */}
+      <TaboolaFeed
+        container="taboola-below-homepage-thumbnails"
+        placement="Below Homepage Thumbnails"
+      />
     </div>
   )
 }

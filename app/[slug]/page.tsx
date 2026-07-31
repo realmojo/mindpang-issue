@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react"
 import { getIssueBySlug, getRelatedIssues } from "@/lib/issues"
 import { IssueCard } from "@/components/issue-card"
 import { AdUnit } from "@/components/ad-unit"
+import { TaboolaFeed } from "@/components/taboola-feed"
 import { siteConfig, issueUrl } from "@/lib/site"
 
 /** 본문 HTML 을 첫 문단(</p>) 뒤에서 분리 — 중간 광고 삽입용 */
@@ -140,6 +141,12 @@ export default async function IssuePage({ params }: Props) {
           </div>
         </section>
       ) : null}
+
+      {/* Taboola 기사 하단 피드 — 본문/관련 글과 별도 컨테이너, 콘텐츠 맨 끝 */}
+      <TaboolaFeed
+        container="taboola-below-article-thumbnails"
+        placement="Below Article Thumbnails"
+      />
     </article>
   )
 }
