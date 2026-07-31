@@ -1,11 +1,9 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 
-import { getIssueBySlug, getRelatedIssues } from "@/lib/issues"
-import { IssueCard } from "@/components/issue-card"
+import { getIssueBySlug } from "@/lib/issues"
 import { AdUnit } from "@/components/ad-unit"
 import { TaboolaFeed } from "@/components/taboola-feed"
 import { siteConfig, issueUrl } from "@/lib/site"
@@ -61,7 +59,6 @@ export default async function IssuePage({ params }: Props) {
   const issue = await getIssueBySlug(decoded)
   if (!issue) notFound()
 
-  const related = await getRelatedIssues(issue.slug, 4)
   const [firstPart, restPart] = splitAfterFirstParagraph(issue.content)
 
   const jsonLd = {
@@ -82,13 +79,13 @@ export default async function IssuePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Link
+      <a
         href="/"
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
         이슈 목록
-      </Link>
+      </a>
 
       {/* 광고: 이슈_상단 (제목 위) */}
       <AdUnit slot="6709317490" className="mb-6" />
@@ -128,22 +125,7 @@ export default async function IssuePage({ params }: Props) {
         />
       ) : null}
 
-      {/* 관련 글 */}
-      {related.length > 0 ? (
-        <section className="mt-16 border-t border-border/70 pt-10">
-          <h2 className="mb-6 text-lg font-extrabold tracking-tight">
-            다른 이슈도 보기
-          </h2>
-          {/* 모바일 2열 × 2줄(4개), 데스크톱 4열 */}
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
-            {related.map((r) => (
-              <IssueCard key={r.id} issue={r} />
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* Taboola 기사 하단 피드 — 본문/관련 글과 별도 컨테이너, 콘텐츠 맨 끝 */}
+      {/* Taboola 기사 하단 피드 — 본문과 별도 컨테이너, 기사 바로 뒤 */}
       <TaboolaFeed
         container="taboola-below-article-thumbnails"
         placement="Below Article Thumbnails"

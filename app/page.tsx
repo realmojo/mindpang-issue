@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Flame } from "lucide-react"
 
 import { getIssues } from "@/lib/issues"
@@ -11,7 +10,8 @@ import { timeAgo } from "@/lib/format"
 export const revalidate = 60
 
 export default async function HomePage() {
-  const issues = await getIssues(6)
+  // 대표 글 1개 + 목록 8개(1줄 2개 × 4줄)
+  const issues = await getIssues(9)
 
   if (issues.length === 0) {
     return (
@@ -35,7 +35,7 @@ export default async function HomePage() {
       </div>
 
       {/* 대표 글 */}
-      <Link
+      <a
         href={`/${encodeURIComponent(featured.slug)}`}
         className="group mb-10 grid gap-5 overflow-hidden rounded-3xl border border-border/70 bg-card md:grid-cols-2"
       >
@@ -63,18 +63,18 @@ export default async function HomePage() {
             {timeAgo(featured.created_at)}
           </div>
         </div>
-      </Link>
+      </a>
 
-      {/* 나머지 목록 */}
+      {/* 나머지 목록 — 1줄에 2개씩 */}
       {rest.length > 0 ? (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-5">
           {rest.map((issue) => (
             <IssueCard key={issue.id} issue={issue} />
           ))}
         </div>
       ) : null}
 
-      {/* Taboola 홈 하단 피드 — 콘텐츠 맨 끝 */}
+      {/* Taboola 홈 하단 피드 — 목록 바로 아래 */}
       <TaboolaFeed
         container="taboola-below-homepage-thumbnails"
         placement="Below Homepage Thumbnails"

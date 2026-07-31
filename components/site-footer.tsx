@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { siteConfig } from "@/lib/site"
 
 export function SiteFooter() {
@@ -18,9 +16,9 @@ export function SiteFooter() {
         </p>
         <p className="mt-3 text-xs">
           © {new Date().getFullYear()} Mindpang.{" "}
-          <Link href="/" className="hover:text-foreground">
+          <a href="/" className="hover:text-foreground">
             issue.mindpang.com
-          </Link>
+          </a>
         </p>
       </div>
     </footer>

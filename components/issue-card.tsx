@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 
 import type { IssueSummary } from "@/lib/issues"
 import { timeAgo } from "@/lib/format"
@@ -10,7 +9,7 @@ export function IssueCard({ issue }: { issue: IssueSummary }) {
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-border/70 bg-card transition-all hover:-translate-y-0.5 hover:border-border hover:shadow-lg hover:shadow-black/[0.04]">
-      <Link href={href} className="block">
+      <a href={href} className="block">
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
           {issue.thumbnail ? (
             <Image
@@ -36,7 +35,7 @@ export function IssueCard({ issue }: { issue: IssueSummary }) {
             {timeAgo(issue.created_at)}
           </div>
         </div>
-      </Link>
+      </a>
     </article>
   )
 }

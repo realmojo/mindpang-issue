@@ -59,9 +59,9 @@ export default function RootLayout({
         {/* Taboola 로더 — 초기 HTML head 에서 실행. 경로 depth 로 PAGE_TYPE 을
             판별(홈=homepage, 그 외=article)하고 loader.js 를 주입한다(차단 시 privacy
             로더로 폴백). 관리자/API 등 비콘텐츠 경로에서는 로더를 띄우지 않는다.
-            PAGE_TYPE 선언은 여기서 전담하고, 위젯 컴포넌트는 container 만 push 한다.
-            단 next/link SPA 이동 시에는 이 스크립트가 다시 실행되지 않으므로,
-            그때는 <TaboolaFeed /> 가 newPageLoad 와 함께 유형을 다시 선언한다. */}
+            사이트 내 이동이 전부 <a> 태그(전체 리로드)라 매 페이지마다 이 스크립트가 다시
+            실행되어 PAGE_TYPE 이 항상 경로와 일치한다.
+            PAGE_TYPE 선언은 여기서 전담하고, 위젯 컴포넌트는 container 만 push 한다. */}
         <script
           id="taboola-loader"
           dangerouslySetInnerHTML={{
