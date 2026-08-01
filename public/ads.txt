@@ -1,5 +1,5 @@
 google.com, pub-9130836798889522, DIRECT, f08c47fec0942fa0
-taboola.com,2083575,DIRECT,c228e6794e811952
+taboola.com, 2083575, DIRECT, c228e6794e811952
 pubmatic.com, 156307, RESELLER, 5d62403b186f2ace
 appnexus.com, 3364, RESELLER
 indexexchange.com, 183756, RESELLER
