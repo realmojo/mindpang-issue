@@ -54,8 +54,20 @@ export async function POST(request: Request) {
 
   const admin = supabaseAdmin()
 
-  // slug: 직접 지정하면 사용, 아니면 제목에서 자동 생성 (중복 시 -2, -3 …)
-  const slug = await uniqueSlug(admin, body.slug ? String(body.slug) : title)
+  // slug: 직접 지정하면 사용, 아니면 자동 증가 숫자 (예: issue.mindpang.com/1040)
+  let slug: string
+  if (body.slug) {
+    slug = await uniqueSlug(admin, String(body.slug))
+  } else {
+    const { data: no, error: noErr } = await admin.rpc("next_issue_no")
+    if (noErr || no == null) {
+      return NextResponse.json(
+        { error: noErr?.message || "slug number generation failed" },
+        { status: 500 },
+      )
+    }
+    slug = String(no)
+  }
 
   // 썸네일: thumbnail(S3 URL 직접) 우선, 없으면 thumbnailUrl(원격 이미지)을 S3로 재업로드
   let thumbnail: string | null = body.thumbnail ? String(body.thumbnail) : null
