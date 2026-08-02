@@ -188,5 +188,5 @@
 
 /* Taboola read-more 버튼 화살표 */
 .tbl-read-more-box .tbl-read-more-btn .tbl-read-more-button-arrow {
-  display: contents !important;
+  display: inline !important;
 }
