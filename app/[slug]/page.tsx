@@ -7,6 +7,7 @@ import { getIssueBySlug } from "@/lib/issues"
 import { AdUnit } from "@/components/ad-unit"
 import { TaboolaFeed } from "@/components/taboola-feed"
 import { ViewTracker } from "@/components/view-tracker"
+import { PwaInstallPrompt } from "@/components/pwa-install-prompt"
 import { siteConfig, issueUrl } from "@/lib/site"
 
 /** 본문 HTML 을 첫 문단(</p>) 뒤에서 분리 — 중간 광고 삽입용 */
@@ -134,6 +135,9 @@ export default async function IssuePage({ params }: Props) {
         container="taboola-below-article-thumbnails"
         placement="Below Article Thumbnails"
       />
+
+      {/* PWA 설치 배너 — 3초 체류 후 하단에서 노출 (미설치 상태에서만) */}
+      <PwaInstallPrompt />
     </article>
   )
 }
