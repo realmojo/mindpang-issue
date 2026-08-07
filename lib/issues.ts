@@ -7,10 +7,11 @@ export type Issue = {
   content: string
   thumbnail: string | null
   created_at: string | null
+  viewCount: number
 }
 
-/** 목록 카드에 필요한 필드만 (본문 제외) */
-export type IssueSummary = Omit<Issue, "content">
+/** 목록 카드에 필요한 필드만 (본문·조회수 제외) */
+export type IssueSummary = Omit<Issue, "content" | "viewCount">
 
 const LIST_COLUMNS = "id, slug, title, thumbnail, created_at"
 
